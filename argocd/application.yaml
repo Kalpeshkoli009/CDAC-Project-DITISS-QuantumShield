@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: flask-app
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/JatinDeshmukh009/DevSecOps-Projec-DITISS-25.git
+    targetRevision: main
+    path: k8s-manifest
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: flask
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
